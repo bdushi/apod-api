@@ -33,17 +33,19 @@ jobs:
       - name: Build Docker Image
         run: |
           echo "Building the Docker image..."
-          docker build . -t apod-api:latest
-        working-directory: apod-api  # Specify the directory directly
+          docker build ./apod-api -t apod-api:latest  # Specify the directory directly
+          echo "Docker image built successfully!"
 
       # Step 5: Tag the image with your Docker Hub username
       - name: Tag Docker Image
         run: |
           echo "Tagging the Docker image..."
           docker tag apod-api:latest ${{ secrets.DOCKER_USERNAME }}/apod-api:latest
+          echo "Docker image tagged successfully!"
 
       # Step 6: Push the Docker image to Docker Hub
       - name: Push Docker Image
         run: |
           echo "Pushing the Docker image to Docker Hub..."
           docker push ${{ secrets.DOCKER_USERNAME }}/apod-api:latest
+          echo "Docker image pushed successfully!"
